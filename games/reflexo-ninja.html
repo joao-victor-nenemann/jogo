@@ -1,0 +1,23 @@
+<!-- /arcade-magico/games/reflexo-ninja.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reflexo Ninja</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Reflexo Ninja</h1>
+  <p>Espere o círculo ficar verde e clique o mais rápido possível!</p>
+  <div id="alvo" style="width:200px;height:200px;background:red;margin:var(--spacing-lg) auto;"></div>
+  <p id="resultado"></p>
+  <a href="../index.html">Voltar</a>
+  <script>
+    const alvo=document.getElementById('alvo'), out=document.getElementById('resultado');let start=false,ts;
+    function prep(){alvo.style.background='red';start=false;setTimeout(()=>{alvo.style.background='green';ts=Date.now();start=true;},Math.random()*3000+2000);}alvo.addEventListener('click',()=>{out.textContent=!start?"Você clicou cedo!":`Seu tempo: ${(Date.now()-ts)/1000}s`;prep();});prep();
+  </script>
+</body>
+</html>

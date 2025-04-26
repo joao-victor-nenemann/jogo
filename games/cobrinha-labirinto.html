@@ -1,0 +1,24 @@
+<!-- /arcade-magico/games/cobrinha-labirinto.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cobrinha Labirinto</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Cobrinha Labirinto</h1>
+  <canvas id="game" width="400" height="400"></canvas>
+  <a href="../index.html">Voltar</a>
+  <script>
+    const c=document.getElementById('game');const ctx=c.getContext('2d');const box=20;let s=[{x:200,y:200}],f={x:100,y:100},d='right';
+    const walls=[{x:100,y:100},{x:120,y:100},{x:140,y:100},{x:100,y:120},{x:100,y:140}];
+    document.addEventListener('keydown',e=>{if(e.key.includes('Arrow'))d=e.key.replace('Arrow','').toLowerCase()});
+    function draw(){ctx.clearRect(0,0,400,400);ctx.fillStyle='black';walls.forEach(w=>ctx.fillRect(w.x,w.y,box,box));ctx.fillStyle='green';s.forEach(p=>ctx.fillRect(p.x,p.y,box,box));ctx.fillStyle='red';ctx.fillRect(f.x,f.y,box,box);let h={...s[0]};if(d==='right')h.x+=box;if(d==='left')h.x-=box;if(d==='up')h.y-=box;if(d==='down')h.y+=box;return (h.x<0||h.x>=400||h.y<0||h.y>=400||s.some(p=>p.x===h.x&&p.y===h.y)||walls.some(w=>w.x===h.x&&w.y===h.y))?alert('Game Over!')&&((s=[{x:200,y:200}]),d='right'):s.unshift(h),(h.x===f.x&&h.y===f.y)?f={x:Math.floor(Math.random()*20)*20,y:Math.floor(Math.random()*20)*20}:s.pop();}
+    setInterval(draw,150);
+  </script>
+</body>
+</html>

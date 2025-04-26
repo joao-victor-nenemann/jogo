@@ -1,0 +1,27 @@
+<!-- /arcade-magico/games/desafio-cores.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desafio das Cores</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Desafio das Cores</h1>
+  <div id="sequencia"></div>
+  <button onclick="mostrarSequencia()">Iniciar</button>
+  <div id="botoes"></div>
+  <p id="mensagem"></p>
+  <a href="../index.html">Voltar</a>
+  <script>
+    const cores=['vermelho','verde','azul','amarelo'];
+    let seq=[],res=[];
+    function mostrarSequencia(){res=[];seq.push(cores[Math.floor(Math.random()*cores.length)]);document.getElementById('mensagem').textContent='';const sd=document.getElementById('sequencia');sd.innerHTML='';seq.forEach((c,i)=>setTimeout(()=>{sd.textContent=c;setTimeout(()=>sd.textContent='',500)},i*1000));criarBotoes();}
+    function criarBotoes(){const b=document.getElementById('botoes');b.innerHTML='';cores.forEach(c=>{const btn=document.createElement('button');btn.textContent=c;btn.onclick=()=>selecionar(c);b.appendChild(btn);});}
+    function selecionar(c){res.push(c);if(res.length===seq.length){if(res.every((v,i)=>v===seq[i])){document.getElementById('mensagem').textContent='Você acertou!';mostrarSequencia()}else{document.getElementById('mensagem').textContent='Você errou! Reiniciando';seq=[];}}}
+  </script>
+</body>
+</html>

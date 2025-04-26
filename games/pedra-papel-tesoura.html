@@ -1,0 +1,28 @@
+<!-- /arcade-magico/games/pedra-papel-tesoura.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedra, Papel, Tesoura</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Pedra, Papel, Tesoura</h1>
+  <button onclick="jogar('pedra')">Pedra</button>
+  <button onclick="jogar('papel')">Papel</button>
+  <button onclick="jogar('tesoura')">Tesoura</button>
+  <p id="resultado"></p>
+  <a href="../index.html">Voltar</a>
+  <script>
+    function jogar(j){
+      const o=['pedra','papel','tesoura'];
+      const c=o[Math.floor(Math.random()*3)];
+      const r=c===j?'Empate':(j==='pedra'&&c==='tesoura'||j==='papel'&&c==='pedra'||j==='tesoura'&&c==='papel')?'Você venceu':'Você perdeu';
+      document.getElementById('resultado').textContent=`Computador: ${c}. ${r}!`;
+    }
+  </script>
+</body>
+</html>

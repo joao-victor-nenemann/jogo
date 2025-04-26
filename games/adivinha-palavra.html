@@ -1,0 +1,35 @@
+<!-- /arcade-magico/games/adivinha-palavra.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Adivinha a Palavra</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Adivinha a Palavra</h1>
+  <p id="dica"></p>
+  <input type="text" id="palpite" placeholder="Digite sua resposta">
+  <button onclick="verificarPalpite()">Enviar</button>
+  <p id="resultado"></p>
+  <a href="../index.html">Voltar</a>
+  <script>
+    const palavras = [
+      {palavra: "gato", dica: "Animal que mia."},
+      {palavra: "sol", dica: "Estrela que ilumina."},
+      {palavra: "carro", dica: "Veículo com rodas."}
+    ];
+    const sorteada = palavras[Math.floor(Math.random() * palavras.length)];
+    document.getElementById("dica").textContent = `Dica: ${sorteada.dica}`;
+    function verificarPalpite() {
+      const palpite = document.getElementById("palpite").value.toLowerCase();
+      document.getElementById("resultado").textContent = palpite === sorteada.palavra
+        ? "Parabéns! Você acertou!"
+        : "Tente novamente!";
+    }
+  </script>
+</body>
+</html>

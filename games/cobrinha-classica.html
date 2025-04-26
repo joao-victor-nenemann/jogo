@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cobrinha Clássica</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Tamanho fixo do canvas */
+    canvas { 
+      width: 100%; 
+      max-width: 400px; 
+      height: auto; 
+      margin: var(--spacing-md) auto; 
+      display: block; 
+    }
+    /* Controles */
+    .controls {
+      text-align: center;
+      margin-bottom: var(--spacing-md);
+    }
+    .controls select,
+    .controls button {
+      font-size: 1rem;
+      padding: var(--spacing-sm) var(--spacing-md);
+      margin: 0 var(--spacing-sm);
+    }
+  </style>
+</head>
+<body>
+  <h1>Cobrinha Clássica</h1>
+
+  <div class="controls">
+    <label for="level">Nível:</label>
+    <select id="level">
+      <option value="200">Fácil</option>
+      <option value="150" selected>Médio</option>
+      <option value="100">Difícil</option>
+      <option value="75">Insano</option>
+    </select>
+    <button id="start">Iniciar Jogo</button>
+  </div>
+
+  <canvas id="game" width="400" height="400"></canvas>
+  <a href="../index.html">Voltar</a>
+
+  <script>
+    const canvas = document.getElementById('game');
+    const ctx    = canvas.getContext('2d');
+    const box    = 20;
+    let snake, food, direction, gameInterval;
+
+    function initGame() {
+      snake     = [{ x: 200, y: 200 }];
+      direction = 'right';
+      placeFood();
+      draw();
+    }
+
+    function placeFood() {
+      food = {
+        x: Math.floor(Math.random() * 20) * box,
+        y: Math.floor(Math.random() * 20) * box
+      };
+    }
+
+    function drawGrid() {
+      ctx.strokeStyle = '#333';
+      for (let x = 0; x <= 400; x += box) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 400);
+        ctx.stroke();
+      }
+      for (let y = 0; y <= 400; y += box) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(400, y);
+        ctx.stroke();
+      }
+    }
+
+    function draw() {
+      // limpa e desenha grade
+      ctx.clearRect(0, 0, 400, 400);
+      drawGrid();
+
+      // desenha cobra
+      snake.forEach((part, i) => {
+        ctx.fillStyle   = i === 0 ? '#0f0' : '#090';
+        ctx.strokeStyle = '#000';
+        ctx.fillRect(part.x, part.y, box, box);
+        ctx.strokeRect(part.x, part.y, box, box);
+      });
+
+      // desenha comida
+      ctx.fillStyle   = '#f00';
+      ctx.strokeStyle = '#000';
+      ctx.fillRect(food.x, food.y, box, box);
+      ctx.strokeRect(food.x, food.y, box, box);
+    }
+
+    document.addEventListener('keydown', e => {
+      const key = e.key.replace('Arrow', '').toLowerCase();
+      const opposites = { left:'right', right:'left', up:'down', down:'up' };
+      if (['left','right','up','down'].includes(key) && key !== opposites[direction]) {
+        direction = key;
+      }
+    });
+
+    function gameLoop() {
+      const head = { ...snake[0] };
+      if (direction === 'right') head.x += box;
+      if (direction === 'left')  head.x -= box;
+      if (direction === 'up')    head.y -= box;
+      if (direction === 'down')  head.y += box;
+
+      // colisões
+      if (
+        head.x < 0 || head.x >= 400 ||
+        head.y < 0 || head.y >= 400 ||
+        snake.some(p => p.x === head.x && p.y === head.y)
+      ) {
+        clearInterval(gameInterval);
+        alert('Game Over!');
+        return;
+      }
+
+      snake.unshift(head);
+      if (head.x === food.x && head.y === food.y) {
+        placeFood();
+      } else {
+        snake.pop();
+      }
+      draw();
+    }
+
+    document.getElementById('start').addEventListener('click', () => {
+      if (gameInterval) clearInterval(gameInterval);
+      initGame();
+      const speed = parseInt(document.getElementById('level').value, 10);
+      gameInterval = setInterval(gameLoop, speed);
+    });
+  </script>
+</body>
+</html>

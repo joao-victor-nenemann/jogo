@@ -1,0 +1,21 @@
+<!-- /arcade-magico/games/desenho-misterioso.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Desenho Misterioso</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Desenho Misterioso</h1>
+  <canvas id="canvas" width="400" height="400"></canvas>
+  <button onclick="limpar()">Limpar</button>
+  <a href="../index.html">Voltar</a>
+  <script>
+    const cnv=document.getElementById('canvas'),g=cnv.getContext('2d');let pen=false;cnv.addEventListener('mousedown',()=>pen=true);cnv.addEventListener('mouseup',()=>pen=false);cnv.addEventListener('mousemove',e=>{if(!pen)return;g.fillStyle='black';g.beginPath();g.arc(e.offsetX,e.offsetY,3,0,2*Math.PI);g.fill();});function limpar(){g.clearRect(0,0,cnv.width,cnv.height);}  
+  </script>
+</body>
+</html>

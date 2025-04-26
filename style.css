@@ -1,0 +1,188 @@
+/* Importação de fonte */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+/* Variáveis de tema */
+:root {
+  --font-primary: 'Orbitron', sans-serif;
+  --color-bg: rgba(27, 27, 27, 0.85);
+  --color-accent: #00ff00;
+  --color-text: #ffffff;
+  --color-text-inverted: rgba(27, 27, 27, 0.85);
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --radius: 0.5rem;
+  --transition-speed: 0.25s;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+  padding: var(--spacing-lg);
+}
+
+/* Título principal */
+h1 {
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+  color: var(--color-accent);
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilização de navegação e menu */
+nav {
+  max-width: 400px;
+  margin: 0 auto var(--spacing-lg);
+}
+nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: 0;
+}
+nav li {
+  list-style: none;
+}
+nav a {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-md);
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--color-accent);
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition:
+    background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease,
+    transform var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+}
+nav a:hover,
+nav a:focus {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverted);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+nav a:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow);
+}
+
+/* Botões e inputs */
+button,
+input[type="button"],
+input[type="submit"] {
+  font-family: var(--font-primary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin: var(--spacing-sm) 0;
+  background-color: var(--color-bg);
+  color: var(--color-accent);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: background-color var(--transition-speed) ease,
+              color var(--transition-speed) ease,
+              transform var(--transition-speed) ease;
+}
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverted);
+  transform: translateY(-1px);
+}
+
+/* Inputs de texto e número */
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: var(--spacing-sm);
+  margin: var(--spacing-sm) 0;
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+/* Canvas para jogos */
+canvas {
+  background: var(--color-text-inverted);
+  display: block;
+  margin: var(--spacing-md) auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Grid para jogos de memória */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: var(--spacing-sm);
+  justify-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+.card {
+  width: 80px;
+  height: 80px;
+  background: var(--color-bg);
+  font-size: 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform var(--transition-speed) ease;
+}
+.card.open {
+  background: var(--color-text);
+  font-size: 2rem;
+  transform: scale(1.05);
+}
+
+/* Links gerais */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  body {
+    padding: var(--spacing-md);
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+  nav a {
+    font-size: 1rem;
+    padding: var(--spacing-md);
+  }
+  button,
+  input[type="button"],
+  input[type="submit"] {
+    font-size: 1rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}

@@ -1,0 +1,24 @@
+<!-- /arcade-magico/games/memoria-maluca.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Memória Maluca</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Memória Maluca</h1>
+  <div class="grid" id="grid"></div>
+  <a href="../index.html">Voltar</a>
+  <script>
+    const emojis=['🍎','🍌','🍒','🍇','🍉','🍍','🥝','🍑'];
+    let cards=[...emojis,...emojis];cards.sort(()=>0.5-Math.random());const g=document.getElementById('grid');let op=[];
+    cards.forEach(e=>{const d=document.createElement('div');d.className='card';d.dataset.e=e;d.onclick=abrir;g.appendChild(d);
+    });
+    function abrir(){if(this.classList.contains('open')||op.length===2)return;this.classList.add('open');this.textContent=this.dataset.e;op.push(this);if(op.length===2)setTimeout(()=>{if(op[0].dataset.e!==op[1].dataset.e){op.forEach(c=>{c.classList.remove('open');c.textContent=''});}op=[];},1000);}
+  </script>
+</body>
+</html>

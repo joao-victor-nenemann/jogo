@@ -1,0 +1,30 @@
+<!-- /arcade-magico/games/quiz-relampago.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz Relâmpago</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <h1>Quiz Relâmpago</h1>
+  <p id="pergunta"></p>
+  <input type="text" id="resposta" placeholder="Digite sua resposta">
+  <button onclick="verificar()">Responder</button>
+  <p id="resultado"></p>
+  <a href="../index.html">Voltar</a>
+  <script>
+    const perguntas=[
+      {q:"Qual a capital do Brasil?",r:"brasilia"},
+      {q:"Quantos dias tem um ano?",r:"365"},
+      {q:"Qual é o maior planeta?",r:"jupiter"}
+    ];
+    let atual=perguntas[Math.floor(Math.random()*perguntas.length)];
+    document.getElementById('pergunta').textContent=atual.q;
+    function verificar(){const a=document.getElementById('resposta').value.toLowerCase();document.getElementById('resultado').textContent=a===atual.r?"Acertou!":"Errou! Tente outra.";}  
+  </script>
+</body>
+</html>
